@@ -18,11 +18,10 @@ import {useEffect, useState} from 'react';
 export default function Newspage({navigation}: any) {
   const dispatch = useDispatch();
   const {colors} = useTheme();
-  const user_data: userState = useSelector(
-    (state: RootState) => state.userSlice,
-  );
 
   const [is_loading, set_is_loading] = useState<boolean>(false);
+  const [is_error, set_Is_error] = useState<boolean>(false);
+  const [server_error, set_server_error] = useState<string>('second');
 
   const {
     control,
@@ -35,16 +34,29 @@ export default function Newspage({navigation}: any) {
     data: signInFormValues,
   ) => {
     set_is_loading(true);
-    signIn(data, dispatch).then(res => {
-      try {
+
+    signIn(data, dispatch)
+      .then(res => {
         dispatch(setUser(res)); // For user_data access throughut the app
-      } catch (err) {
-      } finally {
+      })
+      .catch(errors => {
+        console.log(errors);
+        set_server_error(errors[0]);
+        set_Is_error(true);
+      })
+      .finally(() => {
         set_is_loading(false);
-      }
-      reset();
-    });
+        reset();
+      });
   };
+
+  useEffect(() => {
+    return () => {
+      setTimeout(() => {
+        set_Is_error(false);
+      }, 5000);
+    };
+  }, [is_error]);
 
   const errorMessageStyle = {
     color: colors.error,
@@ -130,6 +142,11 @@ export default function Newspage({navigation}: any) {
             onPress={handleSubmit(onSubmit)}>
             Sign In
           </Button>
+          {is_error && (
+            <View>
+              <Text style={errorMessageStyle}>{server_error}</Text>
+            </View>
+          )}
         </View>
       </View>
       {is_loading && (

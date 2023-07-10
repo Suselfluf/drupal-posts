@@ -8,34 +8,25 @@ import {setHeaders} from '../../store/slices/authorization/headersSlice';
 import {useDispatch} from 'react-redux';
 import {AuthHeaders} from '../../models/users/authHeaders';
 import {logOut} from '../../store/slices/authorization/userSlice';
+import {api} from '../api/api';
+import {ApisauceInstance} from 'apisauce';
 
 export const signIn = async (data: signInFormValues, dispatch: AppDispatch) => {
   let response = new Promise<userState>((resolve, reject) => {
-    axios
-      .post<userState>(
+    api
+      .post<ApisauceInstance>(
         'https://lzone.secret-agents.ru/api/v2/auth/sign_in',
         data,
       )
       .then(res => {
-        resolve(res.data);
-        let {['access-token']: acessToken, client, uid} = res.headers;
-        dispatch(setHeaders({acessToken, client, uid}));
-      })
-      .catch(reason => {
-        reject(reason.response.data);
+        if (res.data?.user) {
+          resolve(res.data);
+          let {['access-token']: acessToken, client, uid} = res.headers;
+          dispatch(setHeaders({acessToken, client, uid}));
+        } else if (!res.data?.succes) {
+          reject(res.data.errors);
+        }
       });
   });
   return response;
-};
-
-export const signOut = async (dispatch: AppDispatch) => {
-  new Promise<void>((resolve, reject) => {
-    dispatch(setHeaders({acessToken: null, client: null, uid: null}));
-  }).then(() => {
-    dispatch(logOut);
-    console.log('signed out');
-  });
-  // localStorage.setItem("is_logged_in", "false");
-  // await dispatch(removeUser());
-  // setTimeout(() => route("/home"));
 };

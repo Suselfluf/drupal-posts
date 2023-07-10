@@ -22,6 +22,7 @@ export default function AppBar() {
   const dispatch = useDispatch();
 
   const handleLogOutPress = () => {
+    // signOut(dispatch);
     dispatch(logOut());
   };
 
