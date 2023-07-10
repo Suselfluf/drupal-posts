@@ -1,14 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {
-  Image,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  useColorScheme,
-  View,
-} from 'react-native';
-import {Avatar, Button, Card, Text, useTheme} from 'react-native-paper';
+import {View} from 'react-native';
+import {Card, Text, useTheme} from 'react-native-paper';
 import {SingleNewState} from '../models/news/newsState';
 import {getNewsById} from '../services/news/getSingleNews';
 

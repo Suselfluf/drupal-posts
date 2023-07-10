@@ -1,22 +1,11 @@
 import React, {useEffect} from 'react';
-import {
-  Button,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {SafeAreaView, ScrollView, Text, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {NewsState} from '../models/news/newsState';
 import {RootState} from '../store/store';
 import {getNews} from '../store/slices/news/newsSlice';
 import NewsFeed from '../components/NewsFeed/NewsFeed';
 import {ActivityIndicator, MD2Colors} from 'react-native-paper';
-import {useTheme} from 'react-native-paper';
-import AppBar from '../components/AppBar/AppBar';
 export default function Homepage({navigation, props}: any) {
   const dispatch = useDispatch();
   const newsFeedState: NewsState = useSelector(

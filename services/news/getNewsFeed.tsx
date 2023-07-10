@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {NewsFeedResponse} from '../../models/responses/getNewsFeedResponse';
 // import { GetAllCamerasResponse } from "../../models/responses/get_all_cameras_response";
 import {api} from '../api/api';

@@ -5,24 +5,15 @@
  * @format
  */
 
-import React, {useEffect} from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-import {Colors, ReloadInstructions} from 'react-native/Libraries/NewAppScreen';
+import React from 'react';
+import {StyleSheet, useColorScheme} from 'react-native';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Authpage from './screens/Authpage';
 import Homepage from './screens/Homepage';
 import Newspage from './screens/Newspage';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {userState} from './models/users/userInitState';
 import {RootState} from './store/store';
 import AppBar from './components/AppBar/AppBar';
@@ -33,8 +24,6 @@ function App(): JSX.Element {
   const user_data: userState = useSelector(
     (state: RootState) => state.userSlice,
   );
-
-  useEffect(() => {}, []);
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -49,7 +38,6 @@ function App(): JSX.Element {
               <Stack.Screen
                 name="News"
                 component={Homepage}
-                // options={{headerShown: false}}
                 options={{
                   header: () => (
                     <>

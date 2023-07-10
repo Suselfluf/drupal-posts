@@ -8,9 +8,7 @@ import {
 } from 'react-native-paper';
 import {useForm, SubmitHandler, Controller} from 'react-hook-form';
 import {signIn} from '../services/auth/authorization';
-import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from '../store/store';
-import {userState} from '../models/users/userInitState';
+import {useDispatch} from 'react-redux';
 import {setUser} from '../store/slices/authorization/userSlice';
 import {signInFormValues} from '../models/users/signInForm';
 import {useEffect, useState} from 'react';
@@ -40,7 +38,6 @@ export default function Newspage({navigation}: any) {
         dispatch(setUser(res)); // For user_data access throughut the app
       })
       .catch(errors => {
-        console.log(errors);
         set_server_error(errors[0]);
         set_Is_error(true);
       })
@@ -95,7 +92,6 @@ export default function Newspage({navigation}: any) {
                   label="Email"
                   onChangeText={value => onChange(value)}
                   onBlur={onBlur}
-                  defaultValue="bullet2271293@gmail.com" // remove before submission
                 />
               )}
               name="email"

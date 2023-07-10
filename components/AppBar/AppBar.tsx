@@ -1,12 +1,3 @@
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
 import {Appbar, Props} from 'react-native-paper';
 import React from 'react';
 import {userState} from '../../models/users/userInitState';

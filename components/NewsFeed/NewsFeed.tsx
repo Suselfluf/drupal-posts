@@ -1,20 +1,18 @@
 import React from 'react';
-import {View, Image} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
+import {View} from 'react-native';
+import {useSelector} from 'react-redux';
 import {NewsState, SingleNewState} from '../../models/news/newsState';
 import {RootState} from '../../store/store';
-import {Avatar, Button, Card, Text, useTheme} from 'react-native-paper';
+import {Button, Card, Text, useTheme} from 'react-native-paper';
 
 export default function NewsFeedCard({navigation, news}: any) {
   const {colors} = useTheme();
-  const dispatch = useDispatch();
   const newsFeed: NewsState = useSelector(
     (state: RootState) => state.newsFeedSlice,
   );
 
   const handleMorePress = (news: SingleNewState) => {
     navigation.navigate('Newspage', {
-      // navigate from the parent component
       news: news,
       title: news.title,
     });

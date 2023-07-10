@@ -1,13 +1,8 @@
-import axios from 'axios';
 import {signInFormValues} from '../../models/users/signInForm';
 
 import {AppDispatch} from '../../store/store';
-import {AuthResponse} from '../../models/responses/AuthResponse';
 import {userState} from '../../models/users/userInitState';
 import {setHeaders} from '../../store/slices/authorization/headersSlice';
-import {useDispatch} from 'react-redux';
-import {AuthHeaders} from '../../models/users/authHeaders';
-import {logOut} from '../../store/slices/authorization/userSlice';
 import {api} from '../api/api';
 import {ApisauceInstance} from 'apisauce';
 

@@ -1,6 +1,5 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {PayloadAction} from '@reduxjs/toolkit';
-import {AuthHeaders} from '../../../models/users/authHeaders';
 import {NewsState} from '../../../models/news/newsState';
 import {getNewsFeed} from '../../../services/news/getNewsFeed';
 import {NewsFeedResponse} from '../../../models/responses/getNewsFeedResponse';
