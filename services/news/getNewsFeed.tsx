@@ -13,7 +13,6 @@ export const getNewsFeed = async () => {
       .catch(reason => {
         reject(reason.response.data);
       });
-    console.log(x);
   });
   return response;
 };

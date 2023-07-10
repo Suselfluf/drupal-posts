@@ -14,8 +14,10 @@ import {NewsState} from '../models/news/newsState';
 import {RootState} from '../store/store';
 import {getNews} from '../store/slices/news/newsSlice';
 import NewsFeed from '../components/NewsFeed/NewsFeed';
-
-export default function Homepage({navigation}: any) {
+import {ActivityIndicator, MD2Colors} from 'react-native-paper';
+import {useTheme} from 'react-native-paper';
+import AppBar from '../components/AppBar/AppBar';
+export default function Homepage({navigation, props}: any) {
   const dispatch = useDispatch();
   const newsFeedState: NewsState = useSelector(
     (state: RootState) => state.newsFeedSlice,
@@ -31,29 +33,20 @@ export default function Homepage({navigation}: any) {
 
   return (
     <SafeAreaView>
+      {/* <AppBar /> */}
       <ScrollView>
         <View>
           {newsFeedState.error && <Text>Error has occured</Text>}
           {newsFeedState.loading === 'pending' && (
-            <View>
-              <Text>Pending...</Text>
+            <View style={{marginTop: 50}}>
+              <ActivityIndicator color={MD2Colors.red800} />
             </View>
           )}
           {newsFeedState.loading === 'succeeded' && (
             <View>
-              <NewsFeed />
+              <NewsFeed navigation={navigation} />
             </View>
           )}
-          <Text>Home page</Text>
-          <Button
-            title="ss"
-            onPress={() => {
-              navigation.navigate('Newspage', {
-                itemId: 86,
-                otherParam: 'anything you want here',
-              });
-            }}
-          />
         </View>
       </ScrollView>
     </SafeAreaView>

@@ -11,21 +11,9 @@ export interface SingleNewState {
   image_additional_url: string | null;
   body: string | null;
   short_text: string | null;
-  created_at: string | Date | null;
+  created_at: Date | null;
   category: string | null;
   icon: string | null;
   model_name: string | null;
   table_name: string | null;
-}
-
-export type camerasListState = {
-  id: number | null;
-  preview: Blob;
-  name: string | null;
-};
-
-export interface CamerasState {
-  cameras: Array<camerasListState>;
-  loading: 'idle' | 'pending' | 'succeeded' | 'failed';
-  error: null | true;
 }

@@ -25,11 +25,11 @@ import Newspage from './screens/Newspage';
 import {useDispatch, useSelector} from 'react-redux';
 import {userState} from './models/users/userInitState';
 import {RootState} from './store/store';
+import AppBar from './components/AppBar/AppBar';
 const Stack = createNativeStackNavigator();
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
-  const dispatch = useDispatch();
   const user_data: userState = useSelector(
     (state: RootState) => state.userSlice,
   );
@@ -46,15 +46,31 @@ function App(): JSX.Element {
         <Stack.Navigator initialRouteName="Authentication">
           {user_data.is_logged_in ? (
             <>
-              <Stack.Screen name="Home" component={Homepage} />
-              <Stack.Screen name="Newspage" component={Newspage} />
-              {/* <Stack.Screen name="Newspage" options={{title: 'Newspage'}}>
-                {props => <Newspage {...props} extraData={'someData'} />}
-              </Stack.Screen> */}
+              <Stack.Screen
+                name="News"
+                component={Homepage}
+                // options={{headerShown: false}}
+                options={{
+                  header: () => (
+                    <>
+                      <AppBar />
+                    </>
+                  ),
+                }}
+              />
+              <Stack.Screen
+                name="Newspage"
+                component={Newspage}
+                options={({route}) => ({title: route.params?.title})}
+              />
             </>
           ) : (
             <>
-              <Stack.Screen name="Authentication" component={Authpage} />
+              <Stack.Screen
+                name="Authentication"
+                component={Authpage}
+                options={{headerShown: false}}
+              />
             </>
           )}
         </Stack.Navigator>
