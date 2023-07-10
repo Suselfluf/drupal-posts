@@ -47,6 +47,11 @@ export default function Homepage({navigation, props}: any) {
               <NewsFeed navigation={navigation} />
             </View>
           )}
+          {newsFeedState.loading === 'failed' && (
+            <View>
+              <Text>Failed</Text>
+            </View>
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>
