@@ -89,7 +89,8 @@ export default function Newspage({navigation}: any) {
                   mode="outlined"
                   style={{backgroundColor: colors.secondary}}
                   value={value}
-                  label="Email"
+                  // label="Email"
+                  placeholder="Email"
                   onChangeText={value => onChange(value)}
                   onBlur={onBlur}
                 />
@@ -105,7 +106,7 @@ export default function Newspage({navigation}: any) {
             <Controller
               control={control}
               rules={{
-                required: 'Password is required',
+                // required: 'Password is required',
                 minLength: {
                   value: 8,
                   message: 'Minimal length is 8 symbols',
@@ -115,12 +116,11 @@ export default function Newspage({navigation}: any) {
                 <TextInput
                   mode="outlined"
                   style={{backgroundColor: colors.secondary}}
-                  label="Password"
+                  placeholder="Password"
                   onChangeText={value => onChange(value)}
                   onBlur={onBlur}
                   value={value}
-                  secureTextEntry
-                  placeholder="Password"></TextInput>
+                  secureTextEntry></TextInput>
               )}
               name="password"
             />
@@ -132,7 +132,7 @@ export default function Newspage({navigation}: any) {
 
         <View style={{alignItems: 'center'}}>
           <Button
-            disabled={errors.email || errors.password}
+            disabled={!!errors.email || !!errors.password}
             style={{width: 120}}
             mode="outlined"
             onPress={handleSubmit(onSubmit)}>
