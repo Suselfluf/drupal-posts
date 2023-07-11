@@ -31,7 +31,7 @@ export default function NewsFeedCard({navigation, news}: any) {
             <Card.Title
               titleStyle={{fontSize: 20, fontWeight: '600'}}
               title={news.title}
-              subtitle={news.short_text}
+              subtitle={news.short_text?.replaceAll(/<\/?[^>]+(>|$)/gi, '')}
               subtitleStyle={{fontSize: 14, fontWeight: '300'}}
             />
             <Card.Cover source={{uri: news.image_url}} />

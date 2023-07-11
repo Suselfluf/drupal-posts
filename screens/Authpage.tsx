@@ -12,7 +12,7 @@ import {useDispatch} from 'react-redux';
 import {setUser} from '../store/slices/authorization/userSlice';
 import {signInFormValues} from '../models/users/signInForm';
 import {useEffect, useState} from 'react';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function Newspage({navigation}: any) {
   const dispatch = useDispatch();
   const {colors} = useTheme();
@@ -54,6 +54,35 @@ export default function Newspage({navigation}: any) {
       }, 5000);
     };
   }, [is_error]);
+
+  const getValue = async () => {
+    try {
+      const email = await AsyncStorage.getItem('email');
+      const password = await AsyncStorage.getItem('password');
+      if (email !== null) {
+        // value previously stored
+        signIn({email: email, password: password}, dispatch)
+          .then(res => {
+            dispatch(setUser(res)); // For user_data access throughut the app
+          })
+          .catch(errors => {
+            set_server_error(errors[0]);
+            set_Is_error(true);
+          })
+          .finally(() => {
+            set_is_loading(false);
+            reset();
+          });
+      }
+    } catch (e) {
+      console.log(e);
+      // error reading value
+    }
+  };
+
+  useEffect(() => {
+    getValue();
+  }, []);
 
   const errorMessageStyle = {
     color: colors.error,
