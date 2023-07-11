@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../store/store';
 import {Avatar} from 'react-native-paper';
 import {logOut} from '../../store/slices/authorization/userSlice';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function AppBar() {
   const user_data: userState = useSelector(
@@ -15,6 +16,8 @@ export default function AppBar() {
   const handleLogOutPress = () => {
     // signOut(dispatch);
     dispatch(logOut());
+    AsyncStorage.setItem('email', '');
+    AsyncStorage.setItem('password', '');
   };
 
   return (
