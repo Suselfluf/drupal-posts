@@ -111,7 +111,10 @@ export default function Newspage({navigation}: any) {
               control={control}
               rules={{
                 required: 'Email is required',
-                pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: 'Format is incorrect',
+                },
               }}
               render={({field: {value, onChange, onBlur}}) => (
                 <TextInput
@@ -126,7 +129,7 @@ export default function Newspage({navigation}: any) {
               )}
               name="email"
             />
-            <Text style={errorMessageStyle}>
+            <Text testID="errorEmailMessage" style={errorMessageStyle}>
               {errors.email && errors.email.message}
             </Text>
           </View>
@@ -135,7 +138,7 @@ export default function Newspage({navigation}: any) {
             <Controller
               control={control}
               rules={{
-                // required: 'Password is required',
+                required: 'Password is required',
                 minLength: {
                   value: 8,
                   message: 'Minimal length is 8 symbols',
@@ -153,7 +156,7 @@ export default function Newspage({navigation}: any) {
               )}
               name="password"
             />
-            <Text style={errorMessageStyle}>
+            <Text testID="errorPasswordMessage" style={errorMessageStyle}>
               {errors.password && errors.password.message}
             </Text>
           </View>
